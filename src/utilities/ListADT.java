@@ -27,23 +27,7 @@ public interface ListADT<E> extends Serializable
 	 */
 	public void clear();
 
-	/**
-	 * Inserts the specified element at the specified position in this list. Shifts
-	 * the element currently at that position (if any) and any subsequent elements
-	 * to the right (adds one to their indices).
-	 * 
-	 * @param index The index at which the specified element is to be inserted. The
-	 *              element is inserted before the existing element at [index], or
-	 *              at the end if index is equal to the size (<code>size()</code>).
-	 * @param toAdd The element to be inserted.
-	 * @return <code>true</code> if the element is added successfully.
-	 * @throws NullPointerException      If the specified element is
-	 *                                   <code>null</code> and the list
-	 *                                   implementation does not support having
-	 *                                   <code>null</code> elements.
-	 * @throws IndexOutOfBoundsException If the index is out of range: i.e.
-	 *                                   (<code>index < 0 || index > size()</code>).
-	 */
+
 	public boolean add( int index, E toAdd ) throws NullPointerException, IndexOutOfBoundsException;
 
 	/**
@@ -83,8 +67,6 @@ public interface ListADT<E> extends Serializable
 	 * 
 	 * @param index Index of element to return.
 	 * @return The element at the specified position in this list.
-	 * @throws IndexOutOfBoundsException If the index is out of range: i.e.
-	 *                                   (<code>index < 0 || index >= size()</code>).
 	 */
 	public E get( int index ) throws IndexOutOfBoundsException;
 
@@ -95,8 +77,6 @@ public interface ListADT<E> extends Serializable
 	 * 
 	 * @param index The index of the element to remove.
 	 * @return The removed element.
-	 * @throws IndexOutOfBoundsException If the index is out of range: i.e.
-	 *                                   (<code>index < 0 || index >= size()</code>).
 	 */
 	public E remove( int index ) throws IndexOutOfBoundsException;
 
@@ -126,8 +106,6 @@ public interface ListADT<E> extends Serializable
 	 *                                   <code>null</code> and the list
 	 *                                   implementation does not support having
 	 *                                   <code>null</code> elements.
-	 * @throws IndexOutOfBoundsException If the index is out of range: i.e.
-	 *                                   (<code>index < 0 || index >= size()</code>).
 	 */
 	public E set( int index, E toChange ) throws NullPointerException, IndexOutOfBoundsException;
 
@@ -179,8 +157,8 @@ public interface ListADT<E> extends Serializable
 	 * Returns an iterator over the elements in this list, in proper sequence.
 	 * 
 	 * @return An iterator over the elements in this list, in proper sequence. NB:
-	 *         The return is of type <code>linearUtilities.Iterator<E></code>, not
-	 *         <code>java.util.Iterator</code>.
+	 *         The return is of type <code>linearUtilities.Iterator</code>, not
+	 *        
 	 */
 	public Iterator<E> iterator();
 }

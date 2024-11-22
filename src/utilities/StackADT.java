@@ -2,6 +2,7 @@ package utilities;
 
 import java.util.Iterator;
 
+//Author Nirbhay Vachhani
 /**
  * this ADT is a last-in, first-out stack of elements (LIFO)
  * 
@@ -21,7 +22,6 @@ public interface StackADT<E> {
 	 * removes and returns element at top of stack
 	 * 
 	 * @return element E that is to be removed
-	 * @throws NoSuchElementException if stack is empty
 	 */
 	E pop();
 	
@@ -29,7 +29,6 @@ public interface StackADT<E> {
 	 * does not remove but returns elemet at top of stack
 	 * 
 	 * @return element E at top
-	 * @throws NoSuchElementException if stack is empty
 	 */
 	E peek();
 	

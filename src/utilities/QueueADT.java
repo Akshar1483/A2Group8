@@ -2,6 +2,7 @@ package utilities;
 
 import java.util.Iterator;
 
+//Author Nirbhay Vachhani
 /**
  * this ADT is a first-in, first-out stack of elements (FIFO)
  * 
@@ -21,7 +22,6 @@ public interface QueueADT<E> {
 	 * removes and returns element at front of queue
 	 * 
 	 * @return element E that is to be removed
-	 * @throws NoSuchElementException if queue is empty
 	 */
 	E dequeue();
 	
@@ -29,7 +29,7 @@ public interface QueueADT<E> {
 	 * does not remove but returns element at from of queue
 	 * 
 	 * @return element E at front
-	 * @throws NoSuchElementException if queue is empty
+	 
 	 */
 	E peek();
 	

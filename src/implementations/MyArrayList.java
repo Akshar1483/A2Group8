@@ -8,6 +8,10 @@ import utilities.ListADT;
 //Author: Martin Davis
 //This class implements the provided ListADT and makes use of Iterator.java.
 
+/**
+ * This iterator traverses through the elements of MyArrayList.
+ * @param <E> the type of elements in the list
+ */
 public class MyArrayList<E> implements ListADT<E> {
 
 	private static final int DEFAULT_CAP = 10; //array must be initialized with a cap, so I made the default 10

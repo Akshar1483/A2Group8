@@ -1,84 +1,58 @@
 package implementations;
 
-import java.util.Iterator;
+import java.util.EmptyStackException;
 import utilities.StackADT;
+import utilities.Iterator;
+import java.util.NoSuchElementException;
 
-
+//Author Nirbhay Vachhani
 /**
- * Stack (LIFO - Last In, First Out) of elements, using `MyArrayList`
- *
- * @param <E> the type of elements held in this stack
+ * This class represents a stack data structure.
+ * @param <E> the type of elements in the stack
  */
 public class MyStack<E> implements StackADT<E> {
     private MyArrayList<E> stack;
 
-    /**
-     * Constructs an empty stack.
-     */
     public MyStack() {
         stack = new MyArrayList<>();
     }
-
-    /**
-     * Adds an element to the top of the stack.
-     *
-     * @param element the element to be added
-     * @throws NullPointerException if the passed element is null
+   /**
+     * Pushes an item onto the stack.
      */
     @Override
     public void push(E element) {
+        if (element == null) throw new NullPointerException("Cannot push null element onto stack");
         stack.add(element);
     }
 
-    /**
-     * Removes and returns the element at the top of the stack.
-     *
-     * @return the element removed from the top of the stack, or null if the stack is empty
-     */
-    @Override
-    public E pop() {
-        if (isEmpty()) {
-            return null;
-        }
-        return stack.remove(stack.size() - 1);
+@Override
+public E pop() {
+    if (isEmpty()) {
+        throw new EmptyStackException();
     }
+    return stack.remove(stack.size() - 1);
+}
 
-    /**
-     * Returns the element at the top of the stack without removing it.
-     *
-     * @return the element at the top of the stack, or null if the stack is empty
-     */
-    @Override
-    public E peek() {
-        if (isEmpty()) {
-            return null;
-        }
-        return stack.get(stack.size() - 1);
+@Override
+public E peek() {
+    if (isEmpty()) {
+        throw new EmptyStackException();
     }
+    return stack.get(stack.size() - 1);
+}
 
-    /**
-     * Checks if the stack is empty.
-     *
-     * @return true if the stack is empty, false otherwise
-     */
+
+
     @Override
     public boolean isEmpty() {
         return stack.isEmpty();
     }
 
-    /**
-     * Returns the number of elements in the stack.
-     *
-     * @return the size of the stack
-     */
     @Override
     public int size() {
         return stack.size();
     }
 
-    /**
-     * Removes all elements from the stack.
-     */
     @Override
     public void clear() {
         stack.clear();
@@ -86,31 +60,75 @@ public class MyStack<E> implements StackADT<E> {
 
     @Override
     public boolean equals(StackADT<E> that) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+        if (that == null || this.size() != that.size()) return false;
 
-    @Override
-    public Iterator<E> iterator() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+        Iterator<E> thisIt = this.iterator();
+        Iterator<E> thatIt = (Iterator<E>) that.iterator();
 
-    @Override
-    public Object[] toArray() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public E[] toArray(E[] copy) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public int search(E obj) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        while (thisIt.hasNext()) {
+            if (!thisIt.next().equals(thatIt.next())) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override
     public boolean contains(E obj) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (obj == null) throw new NullPointerException("Cannot search for null element in stack");
+        return stack.contains(obj);
+    }
+
+    @Override
+    public int search(E obj) {
+        if (obj == null) throw new NullPointerException("Cannot search for null element in stack");
+        for (int i = stack.size() - 1, pos = 1; i >= 0; i--, pos++) {
+            if (obj.equals(stack.get(i))) {
+                return pos;
+            }
+        }
+        return -1;
+    }
+
+    @Override
+    public Iterator<E> iterator() {
+        return new Iterator<E>() {
+            private int currentIndex = stack.size() - 1;
+
+            @Override
+            public boolean hasNext() {
+                return currentIndex >= 0;
+            }
+
+            @Override
+            public E next() {
+                if (!hasNext()) {
+                    throw new NoSuchElementException();
+                }
+                return stack.get(currentIndex--);
+            }
+        };
+    }
+
+    @Override
+    public Object[] toArray() {
+        Object[] result = new Object[stack.size()];
+        for (int i = 0; i < stack.size(); i++) {
+            result[i] = stack.get(stack.size() - 1 - i);
+        }
+        return result;
+    }
+
+    @Override
+    public E[] toArray(E[] copy) {
+        if (copy == null) throw new NullPointerException("The provided array is null");
+
+        if (copy.length < stack.size()) {
+            copy = (E[]) java.lang.reflect.Array.newInstance(copy.getClass().getComponentType(), stack.size());
+        }
+        for (int i = 0; i < stack.size(); i++) {
+            copy[i] = stack.get(stack.size() - 1 - i);
+        }
+        return copy;
     }
 }
