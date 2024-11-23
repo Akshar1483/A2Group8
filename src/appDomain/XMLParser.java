@@ -88,7 +88,6 @@ public class XMLParser {
                         }
                     }
                 } else if (tagContent.endsWith("/")) {
-                    continue;
                 } else {
                     if (!foundRootTag) foundRootTag = true;
                     tagStack.push(tagContent);
